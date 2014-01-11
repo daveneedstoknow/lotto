@@ -1,10 +1,18 @@
 package com.lottery;
 
+import com.lottery.parsers.EndDateParser;
+import com.lottery.parsers.NumberParser;
+import org.joda.time.LocalDate;
+
 public class LotteryApp {
 
-    private static LotteryLauncher launcher = new LotteryLauncher();
+    public static final EndDateParser END_DATE_PARSER = new EndDateParser(new LocalDate());
 
-    public static void main(String [] args) {
+    // Use manual Dependency Injection - using a DI container seems heavyweight for this application
+    private static LotteryLauncher launcher = new LotteryLauncher(new Game(), END_DATE_PARSER,
+            new NumberParser(), System.out);
+
+    public static void main(String[] args) {
         launcher.launch(args);
     }
 
