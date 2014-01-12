@@ -13,7 +13,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Job: Verify Game works correctly
+ * Job: Verify DrawGenerator works correctly
  */
 public class DrawGeneratorTest {
 
