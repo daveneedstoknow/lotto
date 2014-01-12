@@ -2,6 +2,7 @@ package com.lottery;
 
 import org.joda.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,10 +19,11 @@ public class DrawGenerator {
     }
 
     public List<Draw> draw(LocalDate endDate) {
+        List<Draw> draws = new ArrayList<>();
         for (LocalDate drawDate : drawDateFactory.drawDates(endDate)) {
-            lotteryMachine.draw();
+            draws.add(new Draw(drawDate, lotteryMachine.draw()));
         }
 
-        return null;
+        return draws;
     }
 }

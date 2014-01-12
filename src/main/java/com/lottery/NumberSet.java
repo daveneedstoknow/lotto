@@ -11,7 +11,7 @@ public class NumberSet {
 
     private final Set<Integer> numbers = new HashSet<>();
 
-    public NumberSet(int[] numbers) {
+    public NumberSet(int...numbers) {
         for (int number : numbers) {
             this.numbers.add(number);
         }
