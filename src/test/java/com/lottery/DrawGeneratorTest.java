@@ -17,10 +17,14 @@ import static org.mockito.Mockito.when;
  */
 public class DrawGeneratorTest {
 
-    public static final LocalDate DRAW_DATE_1 = new LocalDate();
-    public static final NumberSet NUMBER_SET = new NumberSet(new int[]{1, 2, 3, 4, 5, 6});
+    public static final LocalDate DRAW_DATE_1 = new LocalDate(2010, 2, 1);
+    public static final LocalDate DRAW_DATE_2 = new LocalDate(2010, 2, 3);
+    public static final NumberSet NUMBER_SET_1 = new NumberSet(new int[]{1, 2, 3, 4, 5, 6});
+    public static final Draw DRAW_1 = new Draw(DRAW_DATE_1, NUMBER_SET_1);
+    public static final NumberSet NUMBER_SET_2 = new NumberSet(new int[]{2, 3, 4, 5, 6, 7});
+    public static final Draw DRAW_2 = new Draw(DRAW_DATE_2, NUMBER_SET_2);
     private DrawGenerator drawGenerator;
-    public static final List<LocalDate> DRAW_DATES = Arrays.asList(DRAW_DATE_1);
+    public static final List<LocalDate> DRAW_DATES = Arrays.asList(DRAW_DATE_1, DRAW_DATE_2);
     private DrawDateFactory drawDateFactory;
     private LotteryMachine lotteryMachine;
     public static final LocalDate END_DATE = new LocalDate();
@@ -36,11 +40,11 @@ public class DrawGeneratorTest {
     public void shouldSelectNumbersForEveryDraw() {
 
         when(drawDateFactory.drawDates(END_DATE)).thenReturn(DRAW_DATES);
-        when(lotteryMachine.draw()).thenReturn(NUMBER_SET);
+        when(lotteryMachine.draw()).thenReturn(NUMBER_SET_1, NUMBER_SET_2);
 
         List<Draw> draws = drawGenerator.draw(END_DATE);
 
-        List<Draw> expectedDraws = Arrays.asList(new Draw(DRAW_DATE_1, NUMBER_SET));
+        List<Draw> expectedDraws = Arrays.asList(DRAW_1, DRAW_2);
 
         assertThat(draws, equalTo(expectedDraws));
 
