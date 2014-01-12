@@ -19,21 +19,31 @@ public class LotteryLauncherTest {
 
     public static final String USAGE_MESSAGE = "Usage: Lottery endDate-ddMMyyyy number number number number number number\n";
     public static final String DATE_ARG = "0";
-    public static final String NUMBER_1 = "1";
-    public static final String NUMBER_2 = "2";
-    public static final String NUMBER_3 = "3";
-    public static final String NUMBER_4 = "4";
-    public static final String NUMBER_5 = "5";
-    public static final String NUMBER_6 = "6";
-    public static final String[] CORRECT_NUMBER_OF_ARGS = new String[]{DATE_ARG, NUMBER_1, NUMBER_2, NUMBER_3, NUMBER_4, NUMBER_5, NUMBER_6};
-    public static final String[] TOO_FEW_ARGS = new String[]{DATE_ARG, NUMBER_1, NUMBER_2, NUMBER_3, NUMBER_4, NUMBER_5};
-    public static final String[] TOO_MANY_ARGS = new String[]{DATE_ARG, NUMBER_1, NUMBER_2, NUMBER_3, NUMBER_4, NUMBER_5, NUMBER_6, "7"};
+    public static final String NUMBER_ARG_1 = "1";
+    public static final String NUMBER_ARG_2 = "2";
+    public static final String NUMBER_ARG_3 = "3";
+    public static final String NUMBER_ARG_4 = "4";
+    public static final String NUMBER_ARG_5 = "5";
+    public static final String NUMBER_ARG_6 = "6";
+    public static final String[] NUMBER_ARGS = new String[]{NUMBER_ARG_1, NUMBER_ARG_2, NUMBER_ARG_3, NUMBER_ARG_4, NUMBER_ARG_5, NUMBER_ARG_6};
+    public static final String[] CORRECT_NUMBER_OF_ARGS = new String[]{DATE_ARG, NUMBER_ARG_1, NUMBER_ARG_2, NUMBER_ARG_3, NUMBER_ARG_4, NUMBER_ARG_5, NUMBER_ARG_6};
+    public static final String[] TOO_FEW_ARGS = new String[]{DATE_ARG, NUMBER_ARG_1, NUMBER_ARG_2, NUMBER_ARG_3, NUMBER_ARG_4, NUMBER_ARG_5};
+    public static final String[] TOO_MANY_ARGS = new String[]{DATE_ARG, NUMBER_ARG_1, NUMBER_ARG_2, NUMBER_ARG_3, NUMBER_ARG_4, NUMBER_ARG_5, NUMBER_ARG_6, "7"};
     private Game game;
     private ByteArrayOutputStream outputStream;
     private PrintStream out;
     private EndDateParser endDateParser;
     private LotteryLauncher lotteryLauncher;
     private NumberParser numberParser;
+    public static final int NUMBER_1 = 10;
+    public static final int NUMBER_2 = 20;
+    public static final int NUMBER_3 = 30;
+    public static final int NUMBER_4 = 40;
+    public static final int NUMBER_5 = 50;
+    public static final int NUMBER_6 = 60;
+    public static final int[] PARSED_NUMBERS = new int[]{NUMBER_1, NUMBER_2, NUMBER_3, NUMBER_4,
+            NUMBER_5, NUMBER_6};
+    public static final NumberSet NUMBER_SET = new NumberSet(PARSED_NUMBERS);
 
     @Before
     public void setUp() throws Exception {
@@ -47,9 +57,10 @@ public class LotteryLauncherTest {
 
     @Test
     public void shouldParseDateAsFirstArgument() {
-        when(numberParser.isValid(any(String.class))).thenReturn(true);
+        when(numberParser.isValid((String[]) anyVararg())).thenReturn(true);
         when(endDateParser.isValid(any(String.class))).thenReturn(true);
-        lotteryLauncher.launch(CORRECT_NUMBER_OF_ARGS);
+        when(numberParser.parse((String[]) anyVararg())).thenReturn(PARSED_NUMBERS);
+                lotteryLauncher.launch(CORRECT_NUMBER_OF_ARGS);
         verify(endDateParser).parseDate(eq(DATE_ARG));
     }
 
@@ -83,22 +94,19 @@ public class LotteryLauncherTest {
 
     @Test
     public void shouldValidateAllNumberArguments() {
-        when(numberParser.isValid(any(String.class))).thenReturn(true);
+        when(numberParser.isValid((String[]) anyVararg())).thenReturn(true);
         when(endDateParser.isValid(any(String.class))).thenReturn(true);
+        when(numberParser.parse((String[]) anyVararg())).thenReturn(PARSED_NUMBERS);
 
         lotteryLauncher.launch(CORRECT_NUMBER_OF_ARGS);
 
-        verify(numberParser).isValid(eq(NUMBER_1));
-        verify(numberParser).isValid(eq(NUMBER_2));
-        verify(numberParser).isValid(eq(NUMBER_3));
-        verify(numberParser).isValid(eq(NUMBER_4));
-        verify(numberParser).isValid(eq(NUMBER_5));
-        verify(numberParser).isValid(eq(NUMBER_6));
+        verify(numberParser).parse(eq(NUMBER_ARG_1), eq(NUMBER_ARG_2), eq(NUMBER_ARG_3), eq(NUMBER_ARG_4),
+                eq(NUMBER_ARG_5), eq(NUMBER_ARG_6));
     }
 
     @Test
     public void shouldReportUsageMessageForInvalidNumberArguments() {
-        when(numberParser.isValid(any(String.class))).thenReturn(false);
+        when(numberParser.isValid(any(String[].class))).thenReturn(false);
         when(endDateParser.isValid(any(String.class))).thenReturn(true);
 
         lotteryLauncher.launch(CORRECT_NUMBER_OF_ARGS);
@@ -109,29 +117,22 @@ public class LotteryLauncherTest {
 
     @Test
     public void shouldInitiateGameWithValidArguments() {
-        when(numberParser.isValid(any(String.class))).thenReturn(true);
+        when(numberParser.isValid(eq(NUMBER_ARG_1), eq(NUMBER_ARG_2), eq(NUMBER_ARG_3), eq(NUMBER_ARG_4),
+                eq(NUMBER_ARG_5), eq(NUMBER_ARG_6)))
+                .thenReturn(true);
         when(endDateParser.isValid(any(String.class))).thenReturn(true);
 
-        int expected_1 = 10;
-        int expected_2 = 20;
-        int expected_3 = 30;
-        int expected_4 = 40;
-        int expected_5 = 50;
-        int expected_6 = 60;
-        int[] expected_numbers = {expected_1, expected_2, expected_3, expected_4,
-                expected_5, expected_6};
-        when(numberParser.parse(eq(NUMBER_1))).thenReturn(expected_1);
-        when(numberParser.parse(eq(NUMBER_2))).thenReturn(expected_2);
-        when(numberParser.parse(eq(NUMBER_3))).thenReturn(expected_3);
-        when(numberParser.parse(eq(NUMBER_4))).thenReturn(expected_4);
-        when(numberParser.parse(eq(NUMBER_5))).thenReturn(expected_5);
-        when(numberParser.parse(eq(NUMBER_6))).thenReturn(expected_6);
+        when(numberParser.parse(eq(NUMBER_ARG_1), eq(NUMBER_ARG_2), eq(NUMBER_ARG_3), eq(NUMBER_ARG_4),
+                eq(NUMBER_ARG_5), eq(NUMBER_ARG_6)))
+                .thenReturn(PARSED_NUMBERS);
 
         LocalDate expectedDate = new LocalDate();
         when(endDateParser.parseDate(eq(DATE_ARG))).thenReturn(expectedDate);
 
         lotteryLauncher.launch(CORRECT_NUMBER_OF_ARGS);
-        verify(game).signUp(expectedDate, expected_numbers);
+
+
+        verify(game).run(eq(expectedDate), eq(NUMBER_SET));
     }
 
 }

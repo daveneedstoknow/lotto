@@ -15,7 +15,7 @@ public class LotteryLauncher {
     public static final int END_DATE_POSITION = 0;
     public static final int FIRST_NUMBER_POSITION = 1;
     public static final int LAST_NUMBER_POSITION = 7;
-    public static final int NUMBERS = 6;
+    public static final int SIX_NUMBERS = 6;
     private final Game game;
     private final EndDateParser endDateParser;
     private final NumberParser numberParser;
@@ -37,35 +37,23 @@ public class LotteryLauncher {
         }
 
         LocalDate endDate = endDateParser.parseDate(args[END_DATE_POSITION]);
-        int[] numbers = numbers(args);
 
-        game.signUp(endDate, numbers);
+        int[] parsedNumbers = numberParser.parse(numberArgs(args));
+        game.run(endDate, new NumberSet(parsedNumbers));
     }
 
     private boolean argumentsAreInvalid(String[] args) {
         return !hasCorrectNumberOfArguments(args)
                 || !endDateParser.isValid(args[END_DATE_POSITION])
-                || !numbersAreValid(args);
+                || !numberParser.isValid(numberArgs(args));
     }
 
-    private int[] numbers(String[] args) {
-        int[] numbers = new int[NUMBERS];
+    private String[] numberArgs(String[] args) {
+        String[] numberArgs = new String[SIX_NUMBERS];
         for (int i = FIRST_NUMBER_POSITION; i < LAST_NUMBER_POSITION; i++) {
-            String numberArgument = args[i];
-            numbers[i - 1] = numberParser.parse(numberArgument);
+            numberArgs[i - 1] = args[i];
         }
-        return numbers;
-    }
-
-    private boolean numbersAreValid(String[] args) {
-
-        for (int i = FIRST_NUMBER_POSITION; i < LAST_NUMBER_POSITION; i++) {
-            String number = args[i];
-            if (!numberParser.isValid(number))
-                return false;
-
-        }
-        return true;
+        return numberArgs;
     }
 
     private boolean hasCorrectNumberOfArguments(String[] args) {

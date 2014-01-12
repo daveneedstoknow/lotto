@@ -3,10 +3,13 @@ package com.lottery;
 import org.joda.time.LocalDate;
 
 /**
- * Job: Understands the signUp rules for the lottery game
+ * Job: Runs the lottery game for the dates and numbers specified
  */
 public class Game {
-    public void signUp(LocalDate dateTime, int... numbers) {
 
+    public Game() {
+    }
+
+    public void run(LocalDate endDate, NumberSet numbers) {
     }
 }
