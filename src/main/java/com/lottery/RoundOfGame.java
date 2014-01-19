@@ -7,14 +7,20 @@ import org.joda.time.LocalDate;
  */
 public class RoundOfGame {
     private final LotteryMachine lotteryMachine;
+    private ResultsPublisher resultsPublisher;
+    private final SpecialDateMultiplier specialDateMultiplier;
 
-    public RoundOfGame(LotteryMachine lotteryMachine) {
+    public RoundOfGame(LotteryMachine lotteryMachine, ResultsPublisher resultsPublisher, SpecialDateMultiplier specialDateMultiplier) {
 
         this.lotteryMachine = lotteryMachine;
+        this.resultsPublisher = resultsPublisher;
+        this.specialDateMultiplier = specialDateMultiplier;
     }
 
-    public void draw(LocalDate drawDate, ResultsPublisher resultsPublisher, NumberSet numbers) {
-        Draw draw = new Draw(drawDate, lotteryMachine.draw());
-        resultsPublisher.publish(draw, numbers);
+    public void draw(LocalDate drawDate, NumberSet numbers) {
+        NumberSet drawnNumbers = lotteryMachine.draw();
+        Draw draw = new Draw(drawnNumbers, numbers);
+        long winnings = specialDateMultiplier.applyMultiplier(drawDate, draw);
+        resultsPublisher.publish(drawDate, drawnNumbers, winnings);
     }
 }

@@ -32,7 +32,7 @@ public class GameTest {
     public void setUp() throws Exception {
         roundOfGame = mock(RoundOfGame.class);
         resultsPublisher = mock(ResultsPublisher.class);
-        game = new Game(roundOfGame, resultsPublisher);
+        game = new Game(roundOfGame);
     }
 
     @Test
@@ -40,11 +40,11 @@ public class GameTest {
         game.run(A_MONDAY, A_MONDAY.plusWeeks(2), NUMBERS);
 
         InOrder inOrder = inOrder(roundOfGame);
-        inOrder.verify(roundOfGame).draw(A_MONDAY, resultsPublisher, NUMBERS);
-        inOrder.verify(roundOfGame).draw(WEEK_ON_MONDAY, resultsPublisher, NUMBERS);
-        inOrder.verify(roundOfGame).draw(TWO_WEEKS_ON_MONDAY, resultsPublisher, NUMBERS);
+        inOrder.verify(roundOfGame).draw(A_MONDAY, NUMBERS);
+        inOrder.verify(roundOfGame).draw(WEEK_ON_MONDAY, NUMBERS);
+        inOrder.verify(roundOfGame).draw(TWO_WEEKS_ON_MONDAY, NUMBERS);
 
-        verify(roundOfGame, times(3)).draw(any(LocalDate.class), any(ResultsPublisher.class), any(NumberSet.class));
+        verify(roundOfGame, times(3)).draw(any(LocalDate.class), any(NumberSet.class));
     }
 
 

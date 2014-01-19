@@ -8,11 +8,9 @@ import org.joda.time.LocalDate;
 public class Game {
 
     private final RoundOfGame roundOfGame;
-    private final ResultsPublisher resultsPublisher;
 
-    public Game(final RoundOfGame roundOfGame, final ResultsPublisher resultsPublisher) {
+    public Game(final RoundOfGame roundOfGame) {
         this.roundOfGame = roundOfGame;
-        this.resultsPublisher = resultsPublisher;
     }
 
     public void run(LocalDate firstDraw, LocalDate endDate, NumberSet numbers) {
@@ -20,7 +18,7 @@ public class Game {
         LocalDate drawDate = firstDraw;
 
         while (!drawDate.isAfter(endDate)) {
-            roundOfGame.draw(drawDate, resultsPublisher, numbers);
+            roundOfGame.draw(drawDate, numbers);
             drawDate = drawDate.plusWeeks(1);
         }
     }

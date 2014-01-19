@@ -48,4 +48,26 @@ public class NumberSet {
     public int hashCode() {
         return numbers.hashCode();
     }
+
+    public long sum() {
+        int sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+        return sum;
+    }
+
+    public long productExcluding(NumberSet excludedNumbers) {
+        long product = 1;
+        for (Integer number : numbers) {
+            if (!excludedNumbers.numbers.contains(number)) product = product * number;
+        }
+        return product;
+    }
+
+    public int countMatching(NumberSet other) {
+        Set<Integer> matching = new HashSet<>(numbers);
+        matching.retainAll(other.numbers);
+        return matching.size();
+    }
 }

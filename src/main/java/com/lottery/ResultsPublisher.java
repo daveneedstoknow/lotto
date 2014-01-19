@@ -1,20 +1,13 @@
 package com.lottery;
 
+import org.joda.time.LocalDate;
+
 /**
  * Job: Publish a draw result
  */
 public class ResultsPublisher {
-    private final WinningsCalculator winningsCalculator;
-    private final ConsoleResultWriter consoleResultWriter;
 
-    public ResultsPublisher(WinningsCalculator winningsCalculator, ConsoleResultWriter consoleResultWriter) {
+    public void publish(LocalDate drawDate, NumberSet drawnNumbers, long winnings) {
 
-        this.winningsCalculator = winningsCalculator;
-        this.consoleResultWriter = consoleResultWriter;
-    }
-
-    public void publish(Draw draw, NumberSet numbers) {
-        long winnings = winningsCalculator.calculateWinnings(draw, numbers);
-        consoleResultWriter.write(draw, winnings);
     }
 }
