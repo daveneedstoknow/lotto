@@ -4,15 +4,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
-* Job: Represents a particular set of lottery numbers - whether as a selection of played numbers
- *     or as the numbers in a particular draw
+ * Job: Represents a particular set of lottery numbers - whether as a selection of played numbers
+ * or as the numbers in a particular draw
  */
 public class NumberSet {
 
     public static final int DRAW_SIZE = 6;
     private final Set<Integer> numbers;
 
-    public NumberSet(int...numbers) {
+    public NumberSet(int... numbers) {
         this.numbers = new HashSet<>();
         for (int number : numbers) {
             this.numbers.add(number);

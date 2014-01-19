@@ -19,8 +19,7 @@ public class DrawDateSelector {
         if (dayOfWeek == DateTimeConstants.MONDAY) drawDates.add(startDate);
 
         LocalDate nextDraw = startDate.plusDays(8 - dayOfWeek);
-        while (!nextDraw.isAfter(endDate))
-        {
+        while (!nextDraw.isAfter(endDate)) {
             drawDates.add(nextDraw);
             nextDraw = nextDraw.plusWeeks(1);
         }

@@ -17,7 +17,7 @@ public class NumberParser {
     }
 
     public int[] parse(String... numbersString) {
-        int[]numbers = new int[numbersString.length];
+        int[] numbers = new int[numbersString.length];
         for (int i = 0; i < numbersString.length; i++) {
             String numberString = numbersString[i];
             numbers[i] = Integer.parseInt(numberString);

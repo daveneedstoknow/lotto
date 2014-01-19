@@ -60,7 +60,7 @@ public class LotteryLauncherTest {
         when(numberParser.isValid((String[]) anyVararg())).thenReturn(true);
         when(endDateParser.isValid(any(String.class))).thenReturn(true);
         when(numberParser.parse((String[]) anyVararg())).thenReturn(PARSED_NUMBERS);
-                lotteryLauncher.launch(CORRECT_NUMBER_OF_ARGS);
+        lotteryLauncher.launch(CORRECT_NUMBER_OF_ARGS);
         verify(endDateParser).parseDate(eq(DATE_ARG));
     }
 

@@ -33,7 +33,7 @@ public class NumberParserTest {
     public void shouldAcceptValidNumbers() {
         assertTrue(numberParser.isValid("1"));
         assertTrue(numberParser.isValid("60"));
-        assertTrue(numberParser.isValid("1","60"));
+        assertTrue(numberParser.isValid("1", "60"));
     }
 
     @Test

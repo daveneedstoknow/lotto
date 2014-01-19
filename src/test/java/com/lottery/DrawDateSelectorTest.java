@@ -3,16 +3,12 @@ package com.lottery;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InOrder;
 
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
 
 /**
  * Job: Verify that DrawDateSelector selects draws correctly
@@ -21,10 +17,10 @@ public class DrawDateSelectorTest {
 
     private static final LocalDate END_DATE = new LocalDate(2014, 6, 23);
     private static final LocalDate DAY_AFTER_END_DATE = new LocalDate(2014, 6, 24);
-    private static final LocalDate A_SUNDAY= new LocalDate(2014, 1, 19);
-    private static final LocalDate A_MONDAY= new LocalDate(2014, 1, 20);
-    private static final LocalDate WEEK_ON_MONDAY= new LocalDate(2014, 1, 27);
-    private static final LocalDate TWO_WEEKS_ON_MONDAY= new LocalDate(2014, 2, 3);
+    private static final LocalDate A_SUNDAY = new LocalDate(2014, 1, 19);
+    private static final LocalDate A_MONDAY = new LocalDate(2014, 1, 20);
+    private static final LocalDate WEEK_ON_MONDAY = new LocalDate(2014, 1, 27);
+    private static final LocalDate TWO_WEEKS_ON_MONDAY = new LocalDate(2014, 2, 3);
     private DrawDateSelector drawDateSelector;
 
     @Before

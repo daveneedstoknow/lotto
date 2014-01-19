@@ -1,6 +1,5 @@
 package com.lottery;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -18,8 +17,7 @@ public class LotteryMachine {
 
     public NumberSet draw() {
         Set<Integer> numbers = new HashSet<>();
-        while (numbers.size() < NumberSet.DRAW_SIZE)
-        {
+        while (numbers.size() < NumberSet.DRAW_SIZE) {
             numbers.add(random.nextInt());
         }
         return new NumberSet(numbers);

@@ -20,7 +20,7 @@ public class LotteryMachineTest {
     public void shouldGenerateValidNumberSet() {
         LotteryMachine lotteryMachine = new LotteryMachine(RANDOM);
         when(RANDOM.nextInt()).thenReturn(1, 2, 3, 4, 5, 6,
-                                          1, 1, 2, 3, 4, 5, 8);
+                1, 1, 2, 3, 4, 5, 8);
 
         assertThat(lotteryMachine.draw(), equalTo(new NumberSet(1, 2, 3, 4, 5, 6)));
         assertThat(lotteryMachine.draw(), equalTo(new NumberSet(1, 2, 3, 4, 5, 8)));
