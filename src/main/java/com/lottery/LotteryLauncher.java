@@ -11,7 +11,7 @@ import java.io.PrintStream;
  */
 public class LotteryLauncher {
 
-    public static final String USAGE_MESSAGE = "Usage: Lottery endDate-ddMMyyyy number number number number number number";
+    public static final String USAGE_MESSAGE = "Usage: Lottery dd/MM/yyyy number number number number number number";
     public static final int END_DATE_POSITION = 0;
     public static final int FIRST_NUMBER_POSITION = 1;
     public static final int LAST_NUMBER_POSITION = FIRST_NUMBER_POSITION + NumberSet.DRAW_SIZE;
