@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Job: Generates a set of draws for a game
+ * Job: Generates a set of dated draws for a game
  */
 public class DrawGenerator {
     private final DrawDateFactory drawDateFactory;

@@ -9,13 +9,25 @@ import java.util.Set;
  */
 public class NumberSet {
 
-    private final Set<Integer> numbers = new HashSet<>();
+    public static final int DRAW_SIZE = 6;
+    private final Set<Integer> numbers;
 
     public NumberSet(int...numbers) {
+        this.numbers = new HashSet<>();
         for (int number : numbers) {
             this.numbers.add(number);
         }
-        if (this.numbers.size() != 6) {
+        validateSize();
+    }
+
+    public NumberSet(Set<Integer> numbers) {
+        this.numbers = numbers;
+
+        validateSize();
+    }
+
+    private void validateSize() {
+        if (this.numbers.size() != DRAW_SIZE) {
             throw new IllegalArgumentException("Require 6 unique numbers");
         }
     }
