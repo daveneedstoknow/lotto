@@ -8,7 +8,7 @@ gradle jar
 
 run;
 
-java -jar build/libs/Lottery-Java-Test.jar 10/10/2014 1 2 3 4 5 7
+java -jar build/libs/lotto.jar 10/10/2014 1 2 3 4 5 7
 
 
 Assumptions made as not clear from spec;
