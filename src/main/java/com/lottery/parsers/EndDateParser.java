@@ -30,8 +30,7 @@ public class EndDateParser {
         return DATE_TIME_FORMATTER.parseLocalDate(validEndDate);
     }
 
-    public LocalDate firstDrawDate(String validEndDate)
-    {
+    public LocalDate firstDrawDate(String validEndDate) {
         LocalDate startDate = endDate(validEndDate).minusMonths(GAME_LENGTH_IN_MONTHS);
         int dayOfWeek = startDate.getDayOfWeek();
         return (dayOfWeek == DateTimeConstants.MONDAY) ? startDate : startDate.plusDays(8 - dayOfWeek);

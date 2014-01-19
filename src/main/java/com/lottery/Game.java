@@ -19,8 +19,7 @@ public class Game {
 
         LocalDate drawDate = firstDraw;
 
-        while (!drawDate.isAfter(endDate))
-        {
+        while (!drawDate.isAfter(endDate)) {
             roundOfGame.draw(drawDate, resultsPublisher, numbers);
             drawDate = drawDate.plusWeeks(1);
         }

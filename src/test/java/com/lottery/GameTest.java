@@ -8,8 +8,6 @@ import org.mockito.InOrder;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 /**
@@ -48,7 +46,6 @@ public class GameTest {
 
         verify(roundOfGame, times(3)).draw(any(LocalDate.class), any(ResultsPublisher.class), any(NumberSet.class));
     }
-
 
 
 }
