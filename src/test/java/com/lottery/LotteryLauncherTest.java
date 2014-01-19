@@ -29,6 +29,8 @@ public class LotteryLauncherTest {
     public static final String[] CORRECT_NUMBER_OF_ARGS = new String[]{DATE_ARG, NUMBER_ARG_1, NUMBER_ARG_2, NUMBER_ARG_3, NUMBER_ARG_4, NUMBER_ARG_5, NUMBER_ARG_6};
     public static final String[] TOO_FEW_ARGS = new String[]{DATE_ARG, NUMBER_ARG_1, NUMBER_ARG_2, NUMBER_ARG_3, NUMBER_ARG_4, NUMBER_ARG_5};
     public static final String[] TOO_MANY_ARGS = new String[]{DATE_ARG, NUMBER_ARG_1, NUMBER_ARG_2, NUMBER_ARG_3, NUMBER_ARG_4, NUMBER_ARG_5, NUMBER_ARG_6, "7"};
+    public static final LocalDate END_DATE = new LocalDate(2014, 8, 1);
+    public static final LocalDate FIRST_DRAW_DATE = new LocalDate(2014, 3, 30);
     private Game game;
     private ByteArrayOutputStream outputStream;
     private PrintStream out;
@@ -59,9 +61,10 @@ public class LotteryLauncherTest {
     public void shouldParseDateAsFirstArgument() {
         when(numberParser.isValid((String[]) anyVararg())).thenReturn(true);
         when(endDateParser.isValid(any(String.class))).thenReturn(true);
+        when(endDateParser.endDate(any(String.class))).thenReturn(END_DATE);
         when(numberParser.parse((String[]) anyVararg())).thenReturn(PARSED_NUMBERS);
         lotteryLauncher.launch(CORRECT_NUMBER_OF_ARGS);
-        verify(endDateParser).parseDate(eq(DATE_ARG));
+        verify(endDateParser).endDate(eq(DATE_ARG));
     }
 
     @Test
@@ -96,6 +99,7 @@ public class LotteryLauncherTest {
     public void shouldValidateAllNumberArguments() {
         when(numberParser.isValid((String[]) anyVararg())).thenReturn(true);
         when(endDateParser.isValid(any(String.class))).thenReturn(true);
+        when(endDateParser.endDate(any(String.class))).thenReturn(END_DATE);
         when(numberParser.parse((String[]) anyVararg())).thenReturn(PARSED_NUMBERS);
 
         lotteryLauncher.launch(CORRECT_NUMBER_OF_ARGS);
@@ -126,13 +130,13 @@ public class LotteryLauncherTest {
                 eq(NUMBER_ARG_5), eq(NUMBER_ARG_6)))
                 .thenReturn(PARSED_NUMBERS);
 
-        LocalDate expectedDate = new LocalDate();
-        when(endDateParser.parseDate(eq(DATE_ARG))).thenReturn(expectedDate);
+        when(endDateParser.endDate(eq(DATE_ARG))).thenReturn(END_DATE);
+        when(endDateParser.firstDrawDate(eq(DATE_ARG))).thenReturn(FIRST_DRAW_DATE);
 
         lotteryLauncher.launch(CORRECT_NUMBER_OF_ARGS);
 
 
-        verify(game).run(eq(expectedDate), eq(NUMBER_SET));
+        verify(game).run(eq(FIRST_DRAW_DATE), eq(END_DATE), eq(NUMBER_SET));
     }
 
 }

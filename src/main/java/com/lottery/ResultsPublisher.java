@@ -1,12 +1,20 @@
 package com.lottery;
 
-import java.util.List;
-
 /**
  * Job: Publish a draw result
  */
 public class ResultsPublisher {
-    public void publish(List<Draw> draws, NumberSet numbers) {
+    private final WinningsCalculator winningsCalculator;
+    private final ConsoleResultWriter consoleResultWriter;
 
+    public ResultsPublisher(WinningsCalculator winningsCalculator, ConsoleResultWriter consoleResultWriter) {
+
+        this.winningsCalculator = winningsCalculator;
+        this.consoleResultWriter = consoleResultWriter;
+    }
+
+    public void publish(Draw draw, NumberSet numbers) {
+        long winnings = winningsCalculator.calculateWinnings(draw, numbers);
+        consoleResultWriter.write(draw, winnings);
     }
 }

@@ -36,6 +36,6 @@ public class EndDateParserTest {
 
     @Test
     public void shouldParseDate() {
-        assertEquals(todaysDate, endDateParser.parseDate("01/01/2014"));
+        assertEquals(todaysDate, endDateParser.endDate("01/01/2014"));
     }
 }

@@ -35,10 +35,11 @@ public class LotteryLauncher {
             return;
         }
 
-        LocalDate endDate = endDateParser.parseDate(args[END_DATE_POSITION]);
+        LocalDate endDate = endDateParser.endDate(args[END_DATE_POSITION]);
+        LocalDate firstDrawDate = endDateParser.firstDrawDate(args[END_DATE_POSITION]);
 
         int[] parsedNumbers = numberParser.parse(getNumberArguments(args));
-        game.run(endDate, new NumberSet(parsedNumbers));
+        game.run(firstDrawDate, endDate, new NumberSet(parsedNumbers));
     }
 
     private boolean argumentsAreInvalid(String[] args) {
