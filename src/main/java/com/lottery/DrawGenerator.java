@@ -18,9 +18,9 @@ public class DrawGenerator {
         this.lotteryMachine = lotteryMachine;
     }
 
-    public List<Draw> draw(LocalDate endDate) {
+    public List<Draw> draw(LocalDate startDate, LocalDate endDate) {
         List<Draw> draws = new ArrayList<>();
-        for (LocalDate drawDate : drawDateSelector.drawDates(endDate)) {
+        for (LocalDate drawDate : drawDateSelector.drawDates(startDate, endDate)) {
             draws.add(new Draw(drawDate, lotteryMachine.draw()));
         }
 

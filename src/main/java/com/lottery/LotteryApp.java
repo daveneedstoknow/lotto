@@ -4,14 +4,20 @@ import com.lottery.parsers.EndDateParser;
 import com.lottery.parsers.NumberParser;
 import org.joda.time.LocalDate;
 
+import java.util.Random;
+
 public class LotteryApp {
 
-    public static final EndDateParser END_DATE_PARSER = new EndDateParser(new LocalDate());
-
-    public static final Game GAME = new Game();
     // Use manual Dependency Injection - using a DI container seems heavyweight for this application
-    private static LotteryLauncher launcher = new LotteryLauncher(GAME, END_DATE_PARSER,
-            new NumberParser(), System.out);
+    public static final LocalDate TODAYS_DATE = new LocalDate();
+    public static final EndDateParser END_DATE_PARSER = new EndDateParser(TODAYS_DATE);
+    public static final DrawDateSelector DRAW_DATE_SELECTOR = new DrawDateSelector();
+    public static final LotteryMachine LOTTERY_MACHINE = new LotteryMachine(new Random());
+    public static final DrawGenerator DRAW_GENERATOR = new DrawGenerator(DRAW_DATE_SELECTOR, LOTTERY_MACHINE);
+    public static final ResultsPublisher RESULTS_PUBLISHER = new ResultsPublisher();
+    public static final Game GAME = new Game(DRAW_GENERATOR, RESULTS_PUBLISHER);
+    public static final NumberParser NUMBER_PARSER = new NumberParser();
+    private static LotteryLauncher launcher = new LotteryLauncher(GAME, END_DATE_PARSER, NUMBER_PARSER, System.out);
 
     public static void main(String[] args) {
         launcher.launch(args);

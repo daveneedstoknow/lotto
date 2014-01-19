@@ -28,6 +28,7 @@ public class DrawGeneratorTest {
     private DrawDateSelector drawDateSelector;
     private LotteryMachine lotteryMachine;
     public static final LocalDate END_DATE = new LocalDate();
+    public static final LocalDate START_DATE = new LocalDate();
 
     @Before
     public void setUp() throws Exception {
@@ -39,10 +40,10 @@ public class DrawGeneratorTest {
     @Test
     public void shouldSelectNumbersForEveryDraw() {
 
-        when(drawDateSelector.drawDates(END_DATE)).thenReturn(DRAW_DATES);
+        when(drawDateSelector.drawDates(START_DATE, END_DATE)).thenReturn(DRAW_DATES);
         when(lotteryMachine.draw()).thenReturn(NUMBER_SET_1, NUMBER_SET_2);
 
-        List<Draw> draws = drawGenerator.draw(END_DATE);
+        List<Draw> draws = drawGenerator.draw(START_DATE, END_DATE);
 
         List<Draw> expectedDraws = Arrays.asList(DRAW_1, DRAW_2);
 
