@@ -12,7 +12,7 @@ public class LotteryApp {
     public static final LocalDate TODAYS_DATE = new LocalDate();
     public static final EndDateParser END_DATE_PARSER = new EndDateParser(TODAYS_DATE);
     public static final LotteryMachine LOTTERY_MACHINE = new LotteryMachine(new Random());
-    public static final ResultsPublisher RESULTS_PUBLISHER = new ResultsPublisher();
+    public static final ResultsPublisher RESULTS_PUBLISHER = new ResultsPublisher(System.out);
     public static final SpecialDateMultiplier SPECIAL_DATE_MULTIPLIER = new SpecialDateMultiplier();
 
     public static final RoundOfGame DRAW_GENERATOR = new RoundOfGame(LOTTERY_MACHINE, RESULTS_PUBLISHER, SPECIAL_DATE_MULTIPLIER);

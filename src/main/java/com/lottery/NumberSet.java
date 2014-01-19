@@ -1,7 +1,6 @@
 package com.lottery;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Job: Represents a particular set of lottery numbers - whether as a selection of played numbers
@@ -21,7 +20,7 @@ public class NumberSet {
     }
 
     public NumberSet(Set<Integer> numbers) {
-        this.numbers = numbers;
+        this.numbers = new TreeSet<>(numbers);
 
         validateSize();
     }
@@ -30,6 +29,18 @@ public class NumberSet {
         if (this.numbers.size() != DRAW_SIZE) {
             throw new IllegalArgumentException("Require 6 unique numbers");
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        Iterator<Integer> iterator = numbers.iterator();
+        while ( iterator.hasNext() ) {
+            stringBuilder.append(iterator.next());
+            if (iterator.hasNext())
+                stringBuilder.append(',');
+        }
+        return stringBuilder.toString();
     }
 
     @Override
