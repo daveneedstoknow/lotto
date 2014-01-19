@@ -9,18 +9,18 @@ import java.util.List;
  * Job: Generates a set of dated draws for a game
  */
 public class DrawGenerator {
-    private final DrawDateFactory drawDateFactory;
+    private final DrawDateSelector drawDateSelector;
     private final LotteryMachine lotteryMachine;
 
-    public DrawGenerator(DrawDateFactory drawDateFactory, LotteryMachine lotteryMachine) {
+    public DrawGenerator(DrawDateSelector drawDateSelector, LotteryMachine lotteryMachine) {
 
-        this.drawDateFactory = drawDateFactory;
+        this.drawDateSelector = drawDateSelector;
         this.lotteryMachine = lotteryMachine;
     }
 
     public List<Draw> draw(LocalDate endDate) {
         List<Draw> draws = new ArrayList<>();
-        for (LocalDate drawDate : drawDateFactory.drawDates(endDate)) {
+        for (LocalDate drawDate : drawDateSelector.drawDates(endDate)) {
             draws.add(new Draw(drawDate, lotteryMachine.draw()));
         }
 

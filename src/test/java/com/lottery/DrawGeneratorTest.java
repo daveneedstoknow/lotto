@@ -25,21 +25,21 @@ public class DrawGeneratorTest {
     public static final Draw DRAW_2 = new Draw(DRAW_DATE_2, NUMBER_SET_2);
     private DrawGenerator drawGenerator;
     public static final List<LocalDate> DRAW_DATES = Arrays.asList(DRAW_DATE_1, DRAW_DATE_2);
-    private DrawDateFactory drawDateFactory;
+    private DrawDateSelector drawDateSelector;
     private LotteryMachine lotteryMachine;
     public static final LocalDate END_DATE = new LocalDate();
 
     @Before
     public void setUp() throws Exception {
-        drawDateFactory = mock(DrawDateFactory.class);
+        drawDateSelector = mock(DrawDateSelector.class);
         lotteryMachine = mock(LotteryMachine.class);
-        drawGenerator = new DrawGenerator(drawDateFactory, lotteryMachine);
+        drawGenerator = new DrawGenerator(drawDateSelector, lotteryMachine);
     }
 
     @Test
     public void shouldSelectNumbersForEveryDraw() {
 
-        when(drawDateFactory.drawDates(END_DATE)).thenReturn(DRAW_DATES);
+        when(drawDateSelector.drawDates(END_DATE)).thenReturn(DRAW_DATES);
         when(lotteryMachine.draw()).thenReturn(NUMBER_SET_1, NUMBER_SET_2);
 
         List<Draw> draws = drawGenerator.draw(END_DATE);
