@@ -13,12 +13,12 @@ public class Game {
         this.roundOfGame = roundOfGame;
     }
 
-    public void run(LocalDate firstDraw, LocalDate endDate, NumberSet numbers) {
+    public void run(LocalDate firstDraw, LocalDate endDate, NumberSet playersNumbers) {
 
         LocalDate drawDate = firstDraw;
 
         while (!drawDate.isAfter(endDate)) {
-            roundOfGame.draw(drawDate, numbers);
+            roundOfGame.draw(drawDate, playersNumbers);
             drawDate = drawDate.plusWeeks(1);
         }
     }

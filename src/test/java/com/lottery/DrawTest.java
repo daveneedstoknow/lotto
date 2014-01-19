@@ -7,8 +7,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
 
 /**
  * Job: Ensure Draw works correctly
@@ -22,7 +20,7 @@ public class DrawTest {
     public void shouldImplementEqualsAndHashCode() {
         Draw firstDraw = new Draw(new NumberSet(7, 2, 3, 4, 5, 6), new NumberSet(1, 2, 3, 4, 5, 6));
         Draw secondDraw = new Draw(new NumberSet(7, 2, 3, 4, 5, 6), new NumberSet(1, 2, 3, 4, 5, 6));
-        Draw thirdDraw  = new Draw(new NumberSet(8, 2, 3, 4, 5, 6), new NumberSet(1, 2, 3, 4, 5, 6));
+        Draw thirdDraw = new Draw(new NumberSet(8, 2, 3, 4, 5, 6), new NumberSet(1, 2, 3, 4, 5, 6));
 
         assertThat(firstDraw, equalTo(secondDraw));
         assertThat(firstDraw, not(equalTo(thirdDraw)));
@@ -69,7 +67,7 @@ public class DrawTest {
 
         long expectedWinnings = drawnNumbers.sum() * 10000;
 
-        Draw draw= new Draw(drawnNumbers, playersNumbers6Matching);
+        Draw draw = new Draw(drawnNumbers, playersNumbers6Matching);
 
         assertEquals(expectedWinnings, draw.baseWinnings());
     }

@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 public class LotteryLauncherTest {
 
-    public static final String USAGE_MESSAGE = "Usage: Lottery endDate-ddMMyyyy number number number number number number\n";
+    public static final String USAGE_MESSAGE = "Usage: Lottery dd/MM/yyyy number number number number number number\n";
     public static final String DATE_ARG = "0";
     public static final String NUMBER_ARG_1 = "1";
     public static final String NUMBER_ARG_2 = "2";

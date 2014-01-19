@@ -1,7 +1,7 @@
 package com.lottery.parsers;
 
 /**
- * Job: knows how to parse and validate a lottery number
+ * Job: knows how to parse and validate a user supplied lottery number
  */
 public class NumberParser {
     public boolean isValid(String... numbers) {

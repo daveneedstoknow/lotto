@@ -1,3 +1,23 @@
+To build;
+
+from the project home folder;
+
+// build single jar;
+
+gradle jar
+
+run;
+
+java -jar build/libs/Lottery-Java-Test.jar 10/10/2014 1 2 3 4 5 7
+
+
+Assumptions made as not clear from spec;
+1) If the specifed end date is a Monday it is included in the draws
+2) Start date of "six months befor end date" is assumed to be same day of month but current month number minus 6
+3) if the Start date is a Monday its included otherwise we go forward to the next Monday
+
+
+
 Lottery Test
 ============
 
@@ -18,10 +38,3 @@ You were entrusted with writing the software which will manage this new game. Th
 
 You are required to create a Java application which performs the above task with associated tests. This has to be working software that can be imported to an IDE such as IntelliJ or Eclipse and run with a simple command.
 
-Before you start
-================
-You will need JDK 7 and Gradle. Make sure you run "gradle eclipse" or "gradle idea" to create you IDE project and get the dependencies. Any additional dependencies should be added to build.gradle
-
-You can run all your test using "gradle test".
-
-We will scrutinize your tests so make us happy!

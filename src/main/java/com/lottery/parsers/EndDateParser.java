@@ -7,7 +7,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
 
 /**
- * Understands how to parse an end date
+ * Job: Understands how to parse a user supplied end date to obtain first draw date and end date of lottery game
  */
 public class EndDateParser {
 

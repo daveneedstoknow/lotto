@@ -1,9 +1,7 @@
 package com.lottery;
 
-import org.joda.time.LocalDate;
-
 /**
- * Job: Represents a specific draw result
+ * Job: Understands how many numbers have matched and what that means for base winnings
  */
 public class Draw {
     private final NumberSet drawnNumbers;

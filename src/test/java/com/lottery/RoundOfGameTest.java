@@ -23,14 +23,14 @@ public class RoundOfGameTest {
     private RoundOfGame roundOfGame;
     private LotteryMachine lotteryMachine;
     private ResultsPublisher resultsPublisher;
-    private SpecialDateMultiplier specialDateMultiplier;
+    private WinningsCalculator winningsCalculator;
 
     @Before
     public void setUp() throws Exception {
         lotteryMachine = mock(LotteryMachine.class);
         resultsPublisher = mock(ResultsPublisher.class);
-        specialDateMultiplier = mock(SpecialDateMultiplier.class);
-        roundOfGame = new RoundOfGame(lotteryMachine, resultsPublisher, specialDateMultiplier);
+        winningsCalculator = mock(WinningsCalculator.class);
+        roundOfGame = new RoundOfGame(lotteryMachine, resultsPublisher, winningsCalculator);
     }
 
     @Test
@@ -38,8 +38,8 @@ public class RoundOfGameTest {
 
         when(lotteryMachine.draw()).thenReturn(NUMBER_SET_1, NUMBER_SET_2);
 
-        when(specialDateMultiplier.applyMultiplier(DRAW_DATE_1, DRAW_1)).thenReturn(WINNINGS_1);
-        when(specialDateMultiplier.applyMultiplier(DRAW_DATE_2, DRAW_2)).thenReturn(WINNINGS_2);
+        when(winningsCalculator.applyMultiplier(DRAW_DATE_1, DRAW_1)).thenReturn(WINNINGS_1);
+        when(winningsCalculator.applyMultiplier(DRAW_DATE_2, DRAW_2)).thenReturn(WINNINGS_2);
 
         roundOfGame.draw(DRAW_DATE_1, CHOSEN_NUMBERS);
         roundOfGame.draw(DRAW_DATE_2, CHOSEN_NUMBERS);

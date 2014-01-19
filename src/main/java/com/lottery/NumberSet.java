@@ -1,6 +1,9 @@
 package com.lottery;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Job: Represents a particular set of lottery numbers - whether as a selection of played numbers
@@ -31,11 +34,33 @@ public class NumberSet {
         }
     }
 
+    public long sum() {
+        int sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+        return sum;
+    }
+
+    public long productExcluding(NumberSet excludedNumbers) {
+        long product = 1;
+        for (Integer number : numbers) {
+            if (!excludedNumbers.numbers.contains(number)) product = product * number;
+        }
+        return product;
+    }
+
+    public int countMatching(NumberSet other) {
+        Set<Integer> matching = new HashSet<>(numbers);
+        matching.retainAll(other.numbers);
+        return matching.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<Integer> iterator = numbers.iterator();
-        while ( iterator.hasNext() ) {
+        while (iterator.hasNext()) {
             stringBuilder.append(iterator.next());
             if (iterator.hasNext())
                 stringBuilder.append(',');
@@ -60,25 +85,4 @@ public class NumberSet {
         return numbers.hashCode();
     }
 
-    public long sum() {
-        int sum = 0;
-        for (Integer number : numbers) {
-            sum += number;
-        }
-        return sum;
-    }
-
-    public long productExcluding(NumberSet excludedNumbers) {
-        long product = 1;
-        for (Integer number : numbers) {
-            if (!excludedNumbers.numbers.contains(number)) product = product * number;
-        }
-        return product;
-    }
-
-    public int countMatching(NumberSet other) {
-        Set<Integer> matching = new HashSet<>(numbers);
-        matching.retainAll(other.numbers);
-        return matching.size();
-    }
 }

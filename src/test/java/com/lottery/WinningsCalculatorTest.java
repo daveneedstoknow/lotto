@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 /**
  * Job: Calculates winnings from Draw and Date
  */
-public class SpecialDateMultiplierTest {
+public class WinningsCalculatorTest {
 
     public static final LocalDate FEB_29 = new LocalDate(2004, 2, 29);
     public static final LocalDate FEB_28 = new LocalDate(2004, 2, 28);
@@ -19,27 +19,28 @@ public class SpecialDateMultiplierTest {
     public static final LocalDate LEAP_YEAR_NOT_FEB = new LocalDate(2004, 1, 2);
     public static final long BASE_WINNINGS = 4l;
     private Draw draw;
-    private SpecialDateMultiplier specialDateMultiplier;
+    private WinningsCalculator winningsCalculator;
 
     @Before
     public void setUp() throws Exception {
         draw = mock(Draw.class);
         when(draw.baseWinnings()).thenReturn(BASE_WINNINGS);
-        specialDateMultiplier = new SpecialDateMultiplier();
+        winningsCalculator = new WinningsCalculator();
     }
 
     @Test
     public void shouldReturnBaseWinningsForNonFebInLeapYear() {
-        assertEquals(BASE_WINNINGS, specialDateMultiplier.applyMultiplier(NORMAL_DATE, draw));
-        assertEquals(BASE_WINNINGS, specialDateMultiplier.applyMultiplier(LEAP_YEAR_NOT_FEB, draw));
+        assertEquals(BASE_WINNINGS, winningsCalculator.applyMultiplier(NORMAL_DATE, draw));
+        assertEquals(BASE_WINNINGS, winningsCalculator.applyMultiplier(LEAP_YEAR_NOT_FEB, draw));
     }
+
     @Test
     public void shouldTripleForFebruary29th() {
-        assertEquals(BASE_WINNINGS * 3, specialDateMultiplier.applyMultiplier(FEB_29, draw));
+        assertEquals(BASE_WINNINGS * 3, winningsCalculator.applyMultiplier(FEB_29, draw));
     }
 
     @Test
     public void shouldDoubleForFebruaryInLeapYear() {
-        assertEquals(BASE_WINNINGS * 2, specialDateMultiplier.applyMultiplier(FEB_28, draw));
+        assertEquals(BASE_WINNINGS * 2, winningsCalculator.applyMultiplier(FEB_28, draw));
     }
 }

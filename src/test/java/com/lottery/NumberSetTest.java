@@ -42,7 +42,7 @@ public class NumberSetTest {
     public void shouldCalculateSumOfNumbers() {
         NumberSet numberSet = new NumberSet(60, 59, 58, 57, 56, 55);
 
-        assertEquals( 60 + 59 + 58 + 57 + 56 + 55, numberSet.sum());
+        assertEquals(60 + 59 + 58 + 57 + 56 + 55, numberSet.sum());
     }
 
     @Test

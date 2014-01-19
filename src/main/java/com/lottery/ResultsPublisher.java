@@ -5,7 +5,7 @@ import org.joda.time.LocalDate;
 import java.io.PrintStream;
 
 /**
- * Job: Publish a draw result
+ * Job: Prints a draw result
  */
 public class ResultsPublisher {
 
@@ -17,6 +17,6 @@ public class ResultsPublisher {
     }
 
     public void publish(LocalDate drawDate, NumberSet drawnNumbers, long winnings) {
-        printStream.println(drawDate + "; " + drawnNumbers + "; £" + winnings );
+        printStream.println(drawDate + "; " + drawnNumbers + "; £" + winnings);
     }
 }
