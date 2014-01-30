@@ -26,6 +26,7 @@ public class NumberParserTest {
         assertFalse(numberParser.isValid("-1"));
         assertFalse(numberParser.isValid("0"));
         assertFalse(numberParser.isValid("61"));
+        assertFalse(numberParser.isValid("1", "61"));
         assertFalse(numberParser.isValid("fsdfs", "61"));
     }
 
