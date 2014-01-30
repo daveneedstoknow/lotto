@@ -13,7 +13,7 @@ java -jar build/libs/lotto.jar 10/10/2014 1 2 3 4 5 7
 
 Assumptions made as not clear from spec;
 1) If the specifed end date is a Monday it is included in the draws
-2) Start date of "six months befor end date" is assumed to be same day of month but current month number minus 6
+2) Start date of "six months before end date" is assumed to be same day of month but current month number minus 6
 3) if the Start date is a Monday its included otherwise we go forward to the next Monday
 
 
