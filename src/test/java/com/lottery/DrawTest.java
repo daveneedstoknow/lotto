@@ -7,6 +7,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 /**
  * Job: Ensure Draw works correctly
@@ -16,8 +17,10 @@ public class DrawTest {
     public static final LocalDate NORMAL_DRAW_DATE = new LocalDate(2010, 1, 1);
     public static final LocalDate DRAW_DATE_2 = new LocalDate(2011, 1, 1);
 
+
     @Test
     public void shouldImplementEqualsAndHashCode() {
+        fail();
         Draw firstDraw = new Draw(new NumberSet(7, 2, 3, 4, 5, 6), new NumberSet(1, 2, 3, 4, 5, 6));
         Draw secondDraw = new Draw(new NumberSet(7, 2, 3, 4, 5, 6), new NumberSet(1, 2, 3, 4, 5, 6));
         Draw thirdDraw = new Draw(new NumberSet(8, 2, 3, 4, 5, 6), new NumberSet(1, 2, 3, 4, 5, 6));
